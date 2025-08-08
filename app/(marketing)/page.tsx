@@ -13,7 +13,7 @@ export default function MarketingPage() {
       <header className="container mx-auto flex h-20 items-center justify-between px-6">
         <div className="flex items-center gap-2">
           <HeartHandshake className="h-8 w-8 text-gray-800" />
-          <span className="text-2xl font-bold">TheraSync</span>
+          <span className="text-2xl font-bold">Ariadne's Thread</span>
         </div>
         <nav>
           <Link
@@ -60,7 +60,7 @@ export default function MarketingPage() {
       <footer className="bg-gray-50">
         <div className="container mx-auto px-6 py-12 text-center">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} TheraSync. Tutti i diritti riservati.
+            &copy; {new Date().getFullYear()} BeyondX. Tutti i diritti riservati.
           </p>
         </div>
       </footer>
