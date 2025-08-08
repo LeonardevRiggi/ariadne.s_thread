@@ -5,13 +5,14 @@ import { User, BookOpen, CheckSquare } from 'lucide-react';
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
 
-// Definiamo esplicitamente il tipo per le props della pagina.
-// Questo aiuta a prevenire errori di incompatibilità con i tipi interni di Next.js.
+// Definiamo esplicitamente il tipo per le props della pagina in modo completo,
+// includendo anche i searchParams. Questo risolve l'incompatibilità con i tipi interni di Next.js.
 type PatientDetailPageProps = {
   params: { patientId: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export default async function PatientDetailPage({ params }: PatientDetailPageProps) {
+export default async function PatientDetailPage({ params, searchParams }: PatientDetailPageProps) {
   const { patientId } = params;
   const supabase = createServerComponentClient({ cookies });
 
