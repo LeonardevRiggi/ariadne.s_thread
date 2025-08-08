@@ -1,57 +1,70 @@
 import Link from 'next/link';
-import { ArrowRight, UserCheck } from 'lucide-react';
+import { ArrowRight, UserCheck, HeartHandshake } from 'lucide-react';
 
-/*
-  Nota: Per usare le icone 'ArrowRight' e 'UserCheck',
-  assicurati di aver installato lucide-react:
-  npm install lucide-react
-*/
+// ============================================================================
+// !! SOLUZIONE PER L'ERRORE DI BUILD !!
+// ============================================================================
+// Aggiungendo questa riga, forziamo Next.js a renderizzare questa pagina
+// in modo dinamico per ogni richiesta. Questo risolve il conflitto di build
+// "clientReferenceManifest" perché elimina il tentativo di pre-rendering statico.
+export const dynamic = 'force-dynamic';
+// ============================================================================
 
-export default function HomePage() {
+export default function MarketingPage() {
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-center bg-gray-50 text-gray-800">
-      <div className="container mx-auto flex flex-col items-center justify-center space-y-8 px-4 text-center">
-        
-        {/* Logo o Nome App */}
-        <div className="mb-4">
-          <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            Ariadne's Thread
+    <div className="flex min-h-screen flex-col bg-white text-gray-800">
+      {/* Header */}
+      <header className="container mx-auto flex h-20 items-center justify-between px-6">
+        <div className="flex items-center gap-2">
+          <HeartHandshake className="h-8 w-8 text-gray-800" />
+          <span className="text-2xl font-bold">Ariadne's Thread</span>
+        </div>
+        <nav>
+          <Link
+            href="/login"
+            className="rounded-md px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100"
+          >
+            Accedi
+          </Link>
+        </nav>
+      </header>
+
+      {/* Sezione Principale (Hero) */}
+      <main className="flex-1">
+        <section className="container mx-auto flex flex-col items-center justify-center px-6 py-24 text-center sm:py-32">
+          <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            Un ponte tra una seduta e l'altra
           </h1>
-          <p className="mt-4 text-lg text-gray-600">
-            Un filo da seguire tra una seduta e l'altra.
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+            La nostra piattaforma aiuta pazienti e terapeuti a collaborare in modo più efficace, 
+            trasformando le intuizioni della terapia in progressi quotidiani.
+          </p>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+            <Link
+              href="/login?role=therapist"
+              className="flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-base font-semibold text-white shadow-sm transition-transform duration-150 ease-in-out hover:scale-105 hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
+            >
+              Sei un terapeuta?
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+            <Link
+              href="/invite"
+              className="flex items-center text-base font-semibold leading-6 text-gray-900 transition-transform duration-150 ease-in-out hover:scale-105"
+            >
+              Hai ricevuto un invito? <UserCheck className="ml-2 h-5 w-5" />
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-gray-50">
+        <div className="container mx-auto px-6 py-12 text-center">
+          <p className="text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} TheraSync. Tutti i diritti riservati.
           </p>
         </div>
-
-        {/* Descrizione */}
-        <p className="max-w-2xl text-lg leading-8 text-gray-700 md:text-xl">
-          La nostra piattaforma aiuta pazienti e terapeuti a collaborare in modo più efficace, 
-          trasformando le intuizioni della terapia in progressi quotidiani.
-        </p>
-
-        {/* Call to Action */}
-        <div className="mt-10 flex flex-col items-center justify-center gap-6 sm:flex-row">
-          <Link
-            href="/login?role=therapist" // Esempio di URL per il login del terapeuta
-            className="flex items-center justify-center rounded-md bg-gray-900 px-6 py-3 text-base font-semibold text-white shadow-sm transition-transform duration-150 ease-in-out hover:scale-105 hover:bg-gray-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-          >
-            Sei un terapeuta? Accedi
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Link>
-          <Link
-            href="/invite" // Pagina per chi ha ricevuto un invito
-            className="flex items-center justify-center rounded-md border border-gray-300 bg-white px-6 py-3 text-base font-semibold text-gray-900 shadow-sm transition-transform duration-150 ease-in-out hover:scale-105 hover:bg-gray-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
-          >
-             Hai ricevuto un invito?
-            <UserCheck className="ml-2 h-5 w-5" />
-          </Link>
-        </div>
-
-      </div>
-
-      {/* Footer minimale */}
-      <footer className="absolute bottom-0 py-6 text-center text-sm text-gray-500">
-        <p>&copy; {new Date().getFullYear()} BeyondX. Tutti i diritti riservati.</p>
       </footer>
-    </main>
+    </div>
   );
 }
