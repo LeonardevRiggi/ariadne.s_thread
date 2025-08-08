@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
 import { BookOpen } from 'lucide-react';
-import AddJournalEntryForm from '../../../components/AddJournalEntryForm';
+import AddJournalEntryForm from '../../components/AddJournalEntryForm';
 
 // Tipizzazione per le voci del diario
 type JournalEntry = {

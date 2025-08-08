@@ -2,7 +2,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { CheckSquare, Circle } from 'lucide-react';
-import TaskItem from '../../../components/TaskItem';
+import TaskItem from '../../components/TaskItem';
 
 // Tipizzazione per un singolo task
 export type Task = {
