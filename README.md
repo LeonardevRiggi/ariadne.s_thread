@@ -34,3 +34,28 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Folder Structure 
+
+/app
+  /(marketing)      // Pagine pubbliche come la landing page
+    /page.tsx
+  /(auth)           // Pagine per il login, signup, ecc.
+    /login/page.tsx
+    /auth/callback/route.ts // Gestisce il redirect da Supabase
+  /(dashboard)      // L'applicazione vera e propria, protetta
+    /layout.tsx       // Layout principale che verifica l'autenticazione
+    /therapist/       // Route e componenti solo per il terapeuta
+      /dashboard/page.tsx // Vista con la lista dei pazienti
+      /patient/[patientId]/page.tsx // Dettaglio del singolo paziente
+    /patient/         // Route e componenti solo per il paziente
+      /journal/page.tsx
+      /tasks/page.tsx
+    /account/page.tsx   // Pagina per la gestione del profilo (comune)
+  /invite/page.tsx  // Pagina pubblica dove il paziente completa il profilo
+/lib
+  /supabase/client.ts // Crea il client Supabase per il browser
+  /supabase/server.ts // Crea il client Supabase per il server
+/components
+  /ui/              // Componenti UI riutilizzabili (es. Button, Card con shadcn/ui)
