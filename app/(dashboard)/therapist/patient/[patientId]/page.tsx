@@ -5,9 +5,13 @@ import { User, BookOpen, CheckSquare } from 'lucide-react';
 import { format } from 'date-fns';
 import { it } from 'date-fns/locale';
 
-// La modifica è qui: ho rimosso l'alias 'PageProps' e definito il tipo direttamente nella firma della funzione.
-// Questo risolve il problema di incompatibilità dei tipi con Next.js.
-export default async function PatientDetailPage({ params }: { params: { patientId: string } }) {
+// Definiamo esplicitamente il tipo per le props della pagina.
+// Questo aiuta a prevenire errori di incompatibilità con i tipi interni di Next.js.
+type PatientDetailPageProps = {
+  params: { patientId: string };
+};
+
+export default async function PatientDetailPage({ params }: PatientDetailPageProps) {
   const { patientId } = params;
   const supabase = createServerComponentClient({ cookies });
 
