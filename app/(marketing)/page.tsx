@@ -1,10 +1,14 @@
 import Link from 'next/link';
 import { ArrowRight, UserCheck, HeartHandshake } from 'lucide-react';
 
-/*
-  Nota: Per usare le icone, assicurati di aver installato lucide-react:
-  npm install lucide-react
-*/
+// ============================================================================
+// !! SOLUZIONE PER L'ERRORE DI BUILD !!
+// ============================================================================
+// Aggiungendo questa riga, forziamo Next.js a renderizzare questa pagina
+// in modo dinamico per ogni richiesta. Questo risolve il conflitto di build
+// "clientReferenceManifest" perché elimina il tentativo di pre-rendering statico.
+export const dynamic = 'force-dynamic';
+// ============================================================================
 
 export default function MarketingPage() {
   return (
@@ -51,16 +55,13 @@ export default function MarketingPage() {
             </Link>
           </div>
         </section>
-
-        {/* Altre sezioni (Features, Testimonials, etc.) possono essere aggiunte qui */}
-
       </main>
 
       {/* Footer */}
       <footer className="bg-gray-50">
         <div className="container mx-auto px-6 py-12 text-center">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} BeyondX. Tutti i diritti riservati.
+            &copy; {new Date().getFullYear()} TheraSync. Tutti i diritti riservati.
           </p>
         </div>
       </footer>
