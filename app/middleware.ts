@@ -2,27 +2,18 @@ import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-/**
- * Questo middleware viene eseguito prima di ogni richiesta.
- * Il suo scopo è duplice:
- * 1. Aggiornare la sessione utente (fondamentale per l'autenticazione).
- * 2. Proteggere le rotte del "(dashboard)" reindirizzando gli utenti non autenticati.
- */
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
 
-  // Aggiorna la sessione dell'utente basandosi sui cookie.
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // Se l'utente non è autenticato e cerca di accedere a una pagina protetta...
-  if (!session && req.nextUrl.pathname.startsWith('/dashboard')) {
-    // ...lo reindirizziamo alla pagina di login.
-    const redirectUrl = req.nextUrl.clone();
-    redirectUrl.pathname = '/login';
-    return NextResponse.redirect(redirectUrl);
+  // Se non c'è una sessione, l'utente viene reindirizzato alla pagina di login.
+  // Questa logica viene eseguita solo per le rotte protette definite nel 'matcher' qui sotto.
+  if (!session) {
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   return res;
@@ -32,12 +23,11 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     /*
-     * Abbina tutte le rotte eccetto quelle che iniziano con:
-     * - _next/static (file statici)
-     * - _next/image (ottimizzazione immagini)
-     * - favicon.ico (icona)
-     * Questo migliora le performance.
+     * Abbina tutte le rotte all'interno delle sezioni protette della dashboard.
+     * Il middleware NON verrà eseguito sulle pagine pubbliche (marketing, login, etc.).
      */
-    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/account/:path*',
+    '/patient/:path*',
+    '/therapist/:path*',
   ],
 };
