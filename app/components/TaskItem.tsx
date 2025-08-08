@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/navigation';
-import type { Task } from '@/app/(dashboard)/patient/tasks/page'; // Importa il tipo
+import type { Task } from '@/app/patient/tasks/page'; // Importa il tipo
 import { Check, Circle } from 'lucide-react';
 
 export default function TaskItem({ task }: { task: Task }) {
