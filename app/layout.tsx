@@ -1,13 +1,13 @@
 // app/layout.tsx
 
-import { Inter } from 'next/font/google';
 import './globals.css';
+import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'TheraSync',
-  description: 'Un ponte tra una seduta e l\'altra.',
+  description: "Un ponte tra una seduta e l'altra.",
 };
 
 export default function RootLayout({
